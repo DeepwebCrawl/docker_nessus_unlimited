@@ -32,7 +32,7 @@ RUN set -xe;\
        echo 'done'; \
    } > run.sh;\
    chmod +x run.sh;\
-   python install.py install;
+   python install.py install; \
     /opt/nessus/sbin/nessuscli update /opt/all-2.0_202107162233.tar.gz
 
 CMD [ "sh", "run.sh" ]
