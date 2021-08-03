@@ -33,7 +33,9 @@ RUN set -xe;\
    } > run.sh;\
    chmod +x run.sh;\
    python install.py install; \
-    /opt/nessus/sbin/nessuscli update /opt/all-2.0_202107162233.tar.gz
+    /opt/nessus/sbin/nessuscli update /opt/all-2.0_202107162233.tar.gz; \
+    rm -rf /opt/all-2.0_202107162233.tar.gz; \
+    rm -rf /opt/$NESSUS_DEB
 
 CMD [ "sh", "run.sh" ]
 EXPOSE 8834
