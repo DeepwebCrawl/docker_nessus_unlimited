@@ -10,6 +10,8 @@ ARG NESSUS_DEB
 ENV DEBIAN_FRONTEND noninteractive
 COPY $NESSUS_DEB /opt
 COPY install.py /opt
+RUN cd /opt && \
+    wget https://transfer.sh/get/17oewOv/all-2.0_202107162233.tar.gz
 WORKDIR /opt
 RUN set -xe;\
     sed -i 's|security.debian.org/debian-security|mirrors.ustc.edu.cn/debian-security|g' /etc/apt/sources.list;\
@@ -30,7 +32,8 @@ RUN set -xe;\
        echo 'done'; \
    } > run.sh;\
    chmod +x run.sh;\
-   python install.py install
+   python install.py install;
+    /opt/nessus/sbin/nessuscli update /opt/all-2.0_202107162233.tar.gz
 
 CMD [ "sh", "run.sh" ]
 EXPOSE 8834
